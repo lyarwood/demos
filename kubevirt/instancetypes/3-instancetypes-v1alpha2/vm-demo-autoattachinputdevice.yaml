@@ -1,0 +1,19 @@
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: demo-autoattachinputdevice
+spec:
+  instancetype:
+    name: csmall
+    kind: virtualmachineinstancetype
+  running: true
+  template:
+    spec:
+      domain:
+        devices:
+          autoattachInputDevice: true
+      volumes:
+      - containerDisk:
+          image: registry:5000/kubevirt/cirros-container-disk-demo:devel
+        name: containerdisk

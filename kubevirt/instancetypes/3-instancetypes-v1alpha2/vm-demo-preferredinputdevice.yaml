@@ -1,0 +1,20 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: demo-preferredinputdevice
+spec:
+  instancetype:
+    name: csmall
+    kind: virtualmachineinstancetype
+  preference:
+    name: preferredinputdevice
+    kind: virtualmachinepreference
+  running: true
+  template:
+    spec:
+      domain:
+        devices: {}
+      volumes:
+      - containerDisk:
+          image: registry:5000/kubevirt/cirros-container-disk-demo:devel
+        name: containerdisk
