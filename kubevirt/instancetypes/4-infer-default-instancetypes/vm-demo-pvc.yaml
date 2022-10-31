@@ -1,0 +1,19 @@
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: cirros
+spec:
+  instancetype:
+    inferFromVolume: cirros-disk
+  preference:
+    inferFromVolume: cirros-disk
+  running: true
+  template:
+    spec:
+      domain:
+        devices: {}
+      volumes:
+      - persistentVolumeClaim:
+          claimName: cirros
+        name: cirros-disk

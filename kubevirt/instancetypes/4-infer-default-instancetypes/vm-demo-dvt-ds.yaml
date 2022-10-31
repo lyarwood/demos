@@ -1,0 +1,34 @@
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: cirros
+spec:
+  instancetype:
+    inferFromVolume: cirros-disk
+  preference:
+    inferFromVolume: cirros-disk
+  running: false
+  dataVolumeTemplates:
+    - metadata:
+        name: cirros-dv
+      spec:
+        pvc:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+          storageClassName: local
+        sourceRef:
+          kind: DataSource
+          name: cirros
+          namespace: default
+  template:
+    spec:
+      domain:
+        devices: {}
+      volumes:
+      - dataVolume:
+          name: cirros-dv
+        name: cirros-disk
