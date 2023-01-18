@@ -1,0 +1,29 @@
+apiVersion: ssp.kubevirt.io/v1beta1
+kind: SSP
+metadata:
+  name: ssp-sample
+  namespace: kubevirt
+spec:
+  commonTemplates:
+    namespace: kubevirt
+    dataImportCronTemplates:
+      - metadata:
+          name: cirros-image-cron
+          labels:
+            instancetype.kubevirt.io/default-preference: cirros
+            instancetype.kubevirt.io/default-instancetype: server.micro
+        spec:
+          schedule: "0 */12 * * *"
+          template:
+            spec:
+              source:
+                registry:
+                  url: docker://registry:5000/kubevirt/cirros-container-disk-demo:devel
+              storage:
+                resources:
+                  requests:
+                    storage: 1Gi
+          garbageCollect: Outdated
+          managedDataSource: cirros
+  templateValidator:
+    replicas: 1
