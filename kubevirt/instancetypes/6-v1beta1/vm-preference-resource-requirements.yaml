@@ -1,0 +1,29 @@
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  creationTimestamp: null
+  name: preference-resource-requirements
+spec:
+  preference:
+    inferFromVolume: fedora
+  runStrategy: Always
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      domain:
+        cpu:
+          cores: 1
+          sockets: 1
+          threads: 1
+        devices: {}
+        memory:
+          guest: 128Mi
+        resources: {}
+      terminationGracePeriodSeconds: 180
+      volumes:
+      - name: fedora
+        persistentVolumeClaim:
+          claimName: fedora
+status: {}
