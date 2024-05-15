@@ -1,0 +1,9 @@
+apiVersion: instancetype.kubevirt.io/v1beta1
+kind: VirtualMachineInstancetype
+metadata:
+  name: spread
+spec:
+  cpu:
+    guest: 12
+  memory:
+    guest: 2Gi

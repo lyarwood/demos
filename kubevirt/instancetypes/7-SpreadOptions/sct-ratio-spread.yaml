@@ -1,0 +1,10 @@
+apiVersion: instancetype.kubevirt.io/v1beta1
+kind: VirtualMachinePreference
+metadata:
+  name: sct-ratio-spread
+spec:
+  cpu:
+    preferredCPUTopology: preferSpread
+    spreadOptions:
+      across: SocketsCoresThreads
+      ratio: 3
